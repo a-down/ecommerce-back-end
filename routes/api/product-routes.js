@@ -77,7 +77,7 @@ router.put('/:id', async (req, res) => {
         ProductTag.findAll({
           where: { product_id: req.params.id }
         }).then((productTags) => {
-          // create filtered list of new tag_ids
+
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
           .filter((tag_id) => !productTagIds.includes(tag_id))
@@ -88,11 +88,10 @@ router.put('/:id', async (req, res) => {
             };
           });
 
-            // figure out which ones to remove
           const productTagsToRemove = productTags
           .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
           .map(({ id }) => id);
-                  // run both actions
+
           return Promise.all([
             ProductTag.destroy({ where: { id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),
@@ -100,7 +99,7 @@ router.put('/:id', async (req, res) => {
         });
       }
 
-      return res.json(product);
+      return res.json({message: 'Product updated.'});
     })
     .catch((err) => {
       // console.log(err);
