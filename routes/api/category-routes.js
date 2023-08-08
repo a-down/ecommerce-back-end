@@ -8,20 +8,21 @@ router.get('/', async (req, res) => {
   res.status(200).json(data)
 });
 
-router.get('/:id', (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+router.get('/:id', async (req, res) => {
+  const data = await Category.findByPk(req.params.id, {include: [{model: Product}]} ).catch((err) => res.status(500).json(err))
+  res.status(200).json(data)
 });
 
-router.post('/', (req, res) => {
-  // create a new category
+router.post('/', async (req, res) => {
+  const data = await Category.create({category_name: req.body.category_name}).catch((err) => res.status(500).json(err))
+  res.status(200).json({message: "Category Created", newCategory: data})
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
 });
 
