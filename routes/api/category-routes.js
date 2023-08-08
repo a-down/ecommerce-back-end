@@ -15,38 +15,43 @@ router.get('/:id', async (req, res) => {
     const data = await Category.findByPk(req.params.id, {include: [{model: Product}]} )
     if (!data) {
       res.status(404).json({ message: "No category with this id."})
+      return;
     }
     res.status(200).json(data)
-    } catch (err) {
-      res.status(500).json(err)
-    }
-    
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 
 // post new category
 router.post('/', async (req, res) => {
-  const data = await Category.create({category_name: req.body.category_name}).catch((err) => res.status(500).json(err))
+  const data = await Category.create(
+    { category_name: req.body.category_name })
+    .catch((err) => res.status(500).json(err))
+
   res.status(200).json({message: "Category created", data})
 });
 
 
 // update category by id
 router.put('/:id', async (req, res) => {
-  const data = await Category.update(
-    {
-      category_name: req.body.category_name,
-    },
-    {
-      where: {
-        id: req.params.id,
-      }
-    })
-    .catch((err) => res.status(500).json(err))
+  try {
+    const data = await Category.update(
+      { category_name: req.body.category_name },
+      { where: { id: req.params.id } })
+      .catch((err) => res.status(500).json(err))
+    
+    if (!data) {
+      res.status(404).json({ message: "No category with this id."})
+      return;
+    }
+    
+    res.status(200).json({message: 'Category updated.'})
 
-  const newData = await Category.findByPk(req.params.id, {include: [{model: Product}]} ).catch((err) => res.status(500).json(err))
-
-  res.status(200).json({message: 'Category updated.', newData})
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 
