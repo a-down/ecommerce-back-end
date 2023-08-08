@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
         });
       }
 
-      return res.json({message: 'Product updated.'});
+      return res.json({message: 'Product successfully updated.'});
     })
     .catch((err) => {
       // console.log(err);
@@ -110,7 +110,12 @@ router.put('/:id', async (req, res) => {
 
 // delete product by id
 router.delete('/:id', async (req, res) => {
-  // delete one product by its `id` value
+  const data = await Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).catch((err) => res.status(500).json(err))
+  res.status(200).json({message: "Product successfully deleted."})
 });
 
 module.exports = router;
