@@ -16,8 +16,11 @@ To use the Backend Database, you will need to follow these instructions:
     npm install
     ```
 3. Confirm that ```mysql2```, ```epress```, ```sequelize```, and ```dotenv``` are installed and active.
-4. In MySQL Workbench:
-    - Copy the code from ```schema.sql``` into Workbench and run the code.
+4. In command line, enter the mysql command line. Then:
+    ```
+    create database ecommerce_db;
+    ```
+    (or copy commands from /db/schema.sql into MYSQL Workbench)
 5. In command line:
     ```
     npm run seed
