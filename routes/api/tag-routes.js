@@ -16,6 +16,8 @@ router.get('/', async (req, res) => {
   res.status(200).json(data)
 });
 
+
+// get tag by id
 router.get('/:id', async (req, res) => {
   try {
     const data = await Tag.findByPk(req.params.id, {
@@ -35,14 +37,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// post a new tag
 router.post('/', async (req, res) => {
-  // create a new tag
+  const data = await Tag.create(
+    { tag_name: req.body.tag_name })
+    .catch((err) => res.status(500).json(err))
+  
+  res.status(200).json({message: "Tag created.", data})
 });
 
+
+// update a tag by id
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
 });
 
+
+// delete a tag by id
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
 });
