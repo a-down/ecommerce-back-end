@@ -60,7 +60,6 @@ router.put('/:id', async (req, res) => {
       res.status(404).json({ message: "No tag with this id."})
       return;
     }
-
     res.status(200).json({ message: "Tag updated."})
 
   } catch (err) {
@@ -78,5 +77,6 @@ router.delete('/:id', async (req, res) => {
   }).catch((err) => res.status(500).json(err))
   res.status(200).json({message: `Tag deleted.`})
 });
+
 
 module.exports = router;

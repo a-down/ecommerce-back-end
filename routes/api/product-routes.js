@@ -118,4 +118,5 @@ router.delete('/:id', async (req, res) => {
   res.status(200).json({message: "Product successfully deleted."})
 });
 
+
 module.exports = router;
