@@ -15,7 +15,7 @@ To use the Backend Database, you will need to follow these instructions:
     ```
     npm install
     ```
-3. Confirm that ```mysql2```, ```epress```, ```sequelize```, and ```dotenv``` are installed and active.
+3. Confirm that ```mysql2```, ```express```, ```sequelize```, and ```dotenv``` are installed and active.
 4. In command line, enter the mysql command line. Then:
     ```
     create database ecommerce_db;
@@ -37,7 +37,7 @@ To use the Backend Database, you will need to follow these instructions:
 
 2. Connect to [http://localhost:3001](http://localhost:3001) in Insomnia
 
-3. Use Insomnia to Interact with the Database. Below is a list of available routes:
+3. Use Insomnia to interact with the Database. Below is a list of available routes:
     ```
     GET     /api/categories
     GET     /api/categories/:id
