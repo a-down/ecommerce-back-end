@@ -55,10 +55,10 @@ router.post('/', async (req, res) => {
       }
       res.status(200).json(newData);
     })
-    .then((productTagIds) => res.status(200).json({message: 'New product created.'}))
+    .then(() => res.status(200).json({message: 'New product created.'}))
     .catch((err) => {
       console.log(err);
-      res.status(400).json(err);
+      res.status(400).json({message: 'No tags provided. Product created.'});
     });
 });
 
