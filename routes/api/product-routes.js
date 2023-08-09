@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       { model: Category },
       { model: Tag, 
         through: ProductTag,
-        as: 'products_tags' // WORKS
+        as: 'products_tags'
       },
     ]})
   .catch((err) => res.status(500).json(err))
